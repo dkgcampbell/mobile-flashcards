@@ -3,6 +3,7 @@ import { StyleSheet, View, Platform } from 'react-native';
 import { createMaterialTopTabNavigator, createStackNavigator  } from 'react-navigation'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
+import Deck from './components/Deck'
 import { black, blue, white } from './utils/colours'
 
 const Tabs = createMaterialTopTabNavigator({
@@ -42,6 +43,15 @@ const Tabs = createMaterialTopTabNavigator({
 const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      }
+    }
   }
 })
 
