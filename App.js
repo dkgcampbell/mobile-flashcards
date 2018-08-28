@@ -1,13 +1,55 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
+import { createMaterialTopTabNavigator, createStackNavigator  } from 'react-navigation'
+import Decks from './components/Decks'
+import NewDeck from './components/NewDeck'
+import { black, blue, white } from './utils/colours'
+
+const Tabs = createMaterialTopTabNavigator({
+  Decks: {
+    screen: Decks,
+    navigationOptions: {
+      tabBarLabel: 'Decks'
+    },
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Deck'
+    },
+  }
+}, {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    inactiveTintColor: blue,
+    activeTintColor: black,
+    style: {
+      height: 56,
+      backgroundColor: white,
+      shadowColor: 'rgba(0, 0, 0, 0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
+    }
+  }
+})
+
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+  }
+})
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <MainNavigator />
       </View>
     );
   }
@@ -15,9 +57,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1
   },
 });
