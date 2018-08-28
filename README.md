@@ -1,3 +1,22 @@
+# Mobile Flashcards
+
+## Installation
+Install all project dependencies with 
+```
+npm install
+```
+
+## Launch
+Start the development server with 
+```
+npm start
+```
+
+## Testing
+This project has been tested only on an Android using Expo.
+
+## About
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
