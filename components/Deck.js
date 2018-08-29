@@ -23,10 +23,10 @@ class Deck extends Component {
           <Text style={styles.title}>{deck.title}</Text>
           <Text>{cardCount} {cardText}</Text>
         </View>
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('AddCard', { deck: deck })}>
           <Text style={styles.addButtonText}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.startButton}>
+        <TouchableOpacity style={styles.startButton} onPress={() => this.props.navigation.navigate('Quiz', { deck: deck })}>
           <Text style={styles.startButtonText}>Start Quiz</Text>
         </TouchableOpacity>
       </View>

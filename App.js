@@ -4,6 +4,8 @@ import { createMaterialTopTabNavigator, createStackNavigator  } from 'react-navi
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
+import Quiz from './components/Quiz'
+import AddCard from './components/AddCard'
 import { black, blue, white } from './utils/colours'
 
 const Tabs = createMaterialTopTabNavigator({
@@ -51,6 +53,26 @@ const MainNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: black,
       }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+      title: 'Quiz'
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+      title: 'Add Card'
     }
   }
 })
