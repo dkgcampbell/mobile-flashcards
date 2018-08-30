@@ -61,12 +61,20 @@ class Quiz extends Component {
         <Text style={styles.question}>
           You scored {correctAnswers}/{questions.length}
         </Text>
-        <Text>
-          Restart Quiz
-        </Text>
-        <Text>
-          Back to Deck
-        </Text>
+        <TouchableOpacity style={styles.restartButton} onPress={() => this.setState({ 
+          currentQuestion: 0, 
+          correctAnswers: 0,
+          showQuestion: true
+        })}>
+          <Text style={styles.restartButtonText}>
+            Restart Quiz
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+          <Text style={styles.buttonText}>
+            Back to Deck
+          </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -127,6 +135,27 @@ const styles = StyleSheet.create({
   buttonText :{
     color: white,
     fontSize: 20,
+  },
+  restartButton: {
+    padding: 10,
+    backgroundColor: white,
+    alignSelf: 'center',
+    borderRadius: 5,
+    borderColor: black,
+    borderWidth: 2,
+    margin: 20,
+  },
+  restartButtonText :{
+    color: black,
+    fontSize: 20,
+  },
+  backButton: {
+    padding: 10,
+    backgroundColor: black,
+    alignSelf: 'center',
+    borderRadius: 5,
+    borderWidth: 2,
+    margin: 20,
   }
 })
 
