@@ -1,52 +1,39 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { white, grey } from '../utils/colours'
-import Deck from './Deck'
+import { getDecks } from '../utils/api'
 
 class Decks extends Component {
+  state = {
+    decks: null
+  }
+
   render() {
-    // TODO get from localStorage
-    const decks = {
-      React: {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      JavaScript: {
-        title: 'JavaScript',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      }
-    }
+    getDecks()
+      .then((decks) => {
+        this.setState({decks})
+      })
+    const { decks } = this.state
+    var deckIds = null
+    if (decks) deckIds = Object.keys(decks)
 
     return (
-      <View style={styles.container}>
-        {Object.keys(decks).map((key) => {
+      <ScrollView style={styles.container}>
+        {deckIds && deckIds.map((key) => {
           const deck = decks[key]
-          const cardCount = deck.questions.length
+          const cardCount = deck ? deck.questions.length : 0
           const cardText = cardCount === 1
             ? 'card'
             : 'cards'
+          const title = deck ? deck.title : ''
           return (
             <TouchableOpacity key={key} style={styles.deck} onPress={() => this.props.navigation.navigate('Deck', { deck: deck })}>
-                <Text style={styles.deckTitle}>{deck.title}</Text>
+                <Text style={styles.deckTitle}>{title}</Text>
                 <Text>{cardCount} {cardText}</Text>
             </TouchableOpacity>
           )
         })}
-      </View>
+      </ScrollView>
     )
   }
 }

@@ -12,7 +12,7 @@ class Deck extends Component {
 
   render() {
     const { deck } = this.props.navigation.state.params
-    const cardCount = deck.questions.length
+    const cardCount = deck.questions ? deck.questions.length : 0
     const cardText = cardCount === 1
       ? 'card'
       : 'cards'
