@@ -1,11 +1,25 @@
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, ScrollView, Text, Animated, TouchableOpacity } from 'react-native'
 import { white, grey } from '../utils/colours'
 import { getDecks } from '../utils/api'
 
 class Decks extends Component {
   state = {
-    decks: null
+    decks: null,
+    bounceValue: new Animated.Value(1)
+  }
+
+  onPress = (deck) => {
+    const { bounceValue } = this.state;
+    Animated.sequence([
+      Animated.timing(bounceValue, { duration: 200, toValue: 1.1}),
+      Animated.spring(bounceValue, { toValue: 1, friction: 8})
+    ]).start()
+
+    const self = this;
+    setTimeout(function(){
+      self.props.navigation.navigate('Deck', { deck: deck })
+    },1400)
   }
 
   render() {
@@ -13,7 +27,7 @@ class Decks extends Component {
       .then((decks) => {
         this.setState({decks})
       })
-    const { decks } = this.state
+    const { decks, bounceValue } = this.state
     var deckIds = null
     if (decks) deckIds = Object.keys(decks)
 
@@ -27,10 +41,12 @@ class Decks extends Component {
             : 'cards'
           const title = deck ? deck.title : ''
           return (
-            <TouchableOpacity key={key} style={styles.deck} onPress={() => this.props.navigation.navigate('Deck', { deck: deck })}>
-                <Text style={styles.deckTitle}>{title}</Text>
-                <Text>{cardCount} {cardText}</Text>
-            </TouchableOpacity>
+            <Animated.View key={key} style={{transform:[{scale: bounceValue}]}}>
+              <TouchableOpacity style={styles.deck} onPress={() => this.onPress(deck)}>
+                  <Text style={styles.deckTitle}>{title}</Text>
+                  <Text>{cardCount} {cardText}</Text>
+              </TouchableOpacity>
+            </Animated.View>
           )
         })}
       </ScrollView>
