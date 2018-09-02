@@ -7,6 +7,7 @@ import Deck from './components/Deck'
 import Quiz from './components/Quiz'
 import AddCard from './components/AddCard'
 import { black, blue, white } from './utils/colours'
+import { setLocalNotification } from './utils/notifications'
 
 const Tabs = createMaterialTopTabNavigator({
   Decks: {
@@ -78,6 +79,10 @@ const MainNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <View style={styles.container}>

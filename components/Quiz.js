@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { white, green, red, black } from '../utils/colours'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 class Quiz extends Component {
   state = {
@@ -56,6 +57,8 @@ class Quiz extends Component {
 
   renderScore = () => {
     const { correctAnswers, questions } = this.state
+    clearLocalNotification()
+      .then(setLocalNotification)
     return (
       <View style={styles.container}>
         <Text style={styles.question}>
